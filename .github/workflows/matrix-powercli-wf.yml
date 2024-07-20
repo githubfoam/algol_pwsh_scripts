@@ -1,0 +1,33 @@
+name: "powercli CI workflow windows"
+
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # This cron expression schedules the workflow to run every 5 minutes
+  
+  push:
+    branches: [ test ]
+
+
+
+jobs:
+
+  windows-latest-pwsh-scripts:
+    name: "powercli CI on ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, windows-2022, windows-2019]
+        
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: "powershell version" 
+      run: $PSVersionTable
+    # - name: "PowerCLI - MajorityElement without modules" 
+    #   run: .\scripts\MajorityElement.ps1    
+    - name: "PowerCLI - MajorityElement with modules" 
+      run: .\scripts\MajorityElement_module.ps1   
+    - name: "PowerCLI - Find non repeating first char with modules" 
+      run: .\scripts\FirstNonRepeatingChar.ps1                
+
