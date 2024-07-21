@@ -6,7 +6,7 @@ on:
 
 jobs:
   harden-windows2019:
-    runs-on: windows-2019  r
+    runs-on: windows-2019
 
     steps:
         - name: Checkout repository
