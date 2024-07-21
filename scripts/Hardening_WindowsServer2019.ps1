@@ -20,5 +20,8 @@ Configuration Hardening_WindowsServer2019 {
   Hardening_WindowsServer2019
   
   # Apply the configuration
-  Start-DscConfiguration -Path ./Hardening_WindowsServer2019 -Wait -Verbose
+  #Start-DscConfiguration -Path ./Hardening_WindowsServer2019 -Wait -Verbose
+  # Apply the configuration
+Hardening_WindowsServer2019 -OutputPath "C:\DSC"
+Start-DscConfiguration -Path "C:\DSC" -Wait -Force -Verbose
 s  
