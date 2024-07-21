@@ -18,7 +18,17 @@ jobs:
             Install-Module -Name AuditPolicyDsc -Force -Scope CurrentUser
             Install-Module -Name SecurityPolicyDsc -Force -Scope CurrentUser
           shell: pwsh
-    
+        
+        - name: "Configure and Start WinRM"
+          run: |
+            # Ensure WinRM is properly configured
+            winrm quickconfig -quiet
+            # Allow basic authentication
+            winrm set winrm/config/service/auth @{Basic="true"}
+            # Allow unencrypted traffic
+            winrm set winrm/config/service @{AllowUnencrypted="true"}
+          shell: cmd
+
         - name: "Run DSC Configuration"
           run: |
             # Ensure the script is executable
