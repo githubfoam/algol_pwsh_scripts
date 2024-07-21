@@ -22,7 +22,7 @@ jobs:
         - name: "Run DSC Configuration"
           run: |
             # Ensure the script is executable
-            chmod +x .\Hardening_WindowsServer2019.ps1
+            chmod +x .\scripts\Hardening_WindowsServer2019.ps1
             # Execute the DSC script
             .\scripts\Hardening_WindowsServer2019.ps1
           shell: pwsh
