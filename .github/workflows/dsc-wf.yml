@@ -1,0 +1,18 @@
+name: "DSC Configuration Apply"
+
+on:
+  push:
+    branches: [ test ]  # Update on pushes to the main branch
+
+jobs:
+  configure-windows:
+    runs-on: windows-latest  # Run on a Windows runner
+    steps:
+      - uses: actions/checkout@v3  # Checkout code from repository
+
+      - name: Install-DscResource
+        run: |
+          # Install required DSC resources if needed
+          # Replace with specific modules/resources based on your configuration
+          Install-Module -Name xPSDesiredStateConfiguration
+          # Install-Module -Name PSModuleForYourResource
