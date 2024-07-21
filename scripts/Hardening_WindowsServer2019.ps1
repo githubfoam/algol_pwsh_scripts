@@ -17,7 +17,7 @@ Configuration Hardening_WindowsServer2019 {
   }
   
   # Invoke the configuration
-  CIS_WindowsServer2019_v110
+  Hardening_WindowsServer2019
   
   # Apply the configuration
   Start-DscConfiguration -Path ./Hardening_WindowsServer2019 -Wait -Verbose
