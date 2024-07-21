@@ -34,16 +34,16 @@ jobs:
             winrm set winrm/config/service @{AllowUnencrypted="true"}
           shell: cmd
 
-        - name: "Configure and Start WinRM "
-          run: |
-            # Only configure WinRM if not already configured 
-            if (!(Test-Connection -ComputerName localhost -Port 5985)) {
-              winrm quickconfig -quiet
-              winrm set winrm/config/service/auth @{Basic="true"} # (Security concern, use with caution)
-              winrm set winrm/config/service @{AllowUnencrypted="true"} # (Security concern, use with caution)
-            }
-          shell: cmd
-          
+        # - name: "Configure and Start WinRM "
+        #   run: |
+        #     # Only configure WinRM if not already configured 
+        #     if (!(Test-Connection -ComputerName localhost -Port 5985)) {
+        #       winrm quickconfig -quiet
+        #       winrm set winrm/config/service/auth @{Basic="true"} # (Security concern, use with caution)
+        #       winrm set winrm/config/service @{AllowUnencrypted="true"} # (Security concern, use with caution)
+        #     }
+        #   shell: cmd
+
         - name: "Run DSC Configuration"
           run: |
             # Ensure the script is executable
