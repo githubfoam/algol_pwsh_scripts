@@ -18,7 +18,12 @@ jobs:
             Install-Module -Name AuditPolicyDsc -Force -Scope CurrentUser
             Install-Module -Name SecurityPolicyDsc -Force -Scope CurrentUser
           shell: pwsh
-        
+
+        - name: "Check if the target Windows Server 2019 machine already has the SecurityPolicyDsc module installed"
+          run: |
+            Get-Module -ListAvailable | Where-Object {$_.Name -eq 'SecurityPolicyDsc'}
+          shell: pwsh
+          
         - name: "Configure and Start WinRM"
           run: |
             # Ensure WinRM is properly configured
