@@ -2,17 +2,27 @@ name: "DSC Configuration Apply"
 
 on:
   push:
-    branches: [ test ]  # Update on pushes to the main branch
+    branches: [ test ]  
 
 jobs:
-  configure-windows:
-    runs-on: windows-latest  # Run on a Windows runner
-    steps:
-      - uses: actions/checkout@v3  # Checkout code from repository
+  harden-windows2019:
+    runs-on: windows-2019  r
 
-      - name: Install-DscResource
-        run: |
-          # Install required DSC resources if needed
-          # Replace with specific modules/resources based on your configuration
-          Install-Module -Name xPSDesiredStateConfiguration
-          # Install-Module -Name PSModuleForYourResource
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3  
+
+        - name: "Install Required DSC Modules"
+          run: |
+            Install-Module -Name PSDesiredStateConfiguration -Force -Scope CurrentUser
+            Install-Module -Name AuditPolicyDsc -Force -Scope CurrentUser
+            Install-Module -Name SecurityPolicyDsc -Force -Scope CurrentUser
+          shell: pwsh
+    
+        - name: "Run DSC Configuration"
+          run: |
+            # Ensure the script is executable
+            chmod +x .\Hardening_WindowsServer2019.ps1
+            # Execute the DSC script
+            .\scripts\Hardening_WindowsServer2019.ps1
+          shell: pwsh
